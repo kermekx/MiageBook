@@ -23,7 +23,7 @@ public final class LoginForm {
 
 	public User userLogin(HttpServletRequest request) {
 		/* Récupération des champs du formulaire */
-		String username = getValeurChamp(request, CHAMP_EMAIL);
+		String username = getValeurChamp(request, CHAMP_USER);
 		String password = getValeurChamp(request, CHAMP_PASS);
 
 		User user = new User();
@@ -58,8 +58,14 @@ public final class LoginForm {
 	 * Valide l'adresse email saisie.
 	 */
 	private void validateUsername(String username) throws Exception {
-		if (username != null && !username.matches("^\\S+$")) {
-			throw new Exception("Merci de saisir un nom d'utilisateur valide.");
+		if (username != null) {
+			if (!username.matches("\\S+")) {
+				throw new Exception("Le nom d'utilisateur ne doi pas contenir d'espaces.");
+			} else if (username.length() < 3) {
+				throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
+			}
+		} else {
+			throw new Exception("Merci de saisir votre nom d'utilisateur.");
 		}
 	}
 
