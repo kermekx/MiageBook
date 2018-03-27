@@ -1,17 +1,48 @@
 package auth;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 
-@Path("login")
-public class Login {
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public String login() {
-		return null;
+public class Login extends HttpServlet {
+	public static final String ATT_USER = "user";
+	public static final String ATT_FORM = "form";
+	public static final String ATT_SESSION_USER = "userSession";
+	public static final String VUE = "/WEB-INF/login.jsp";
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/* Affichage de la page de connexion */
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/* Préparation de l'objet formulaire */
+		LoginForm form = new LoginForm();
+
+		/* Traitement de la requête et récupération du bean en résultant */
+		User utilisateur = form.userLogin(request);
+
+		/* Récupération de la session depuis la requête */
+		HttpSession session = request.getSession();
+
+		/**
+		 * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
+		 * Utilisateur à la session, sinon suppression du bean de la session.
+		 */
+		if (form.getErreurs().isEmpty()) {
+			session.setAttribute(ATT_SESSION_USER, utilisateur);
+		} else {
+			session.setAttribute(ATT_SESSION_USER, null);
+		}
+
+		/* Stockage du formulaire et du bean dans l'objet request */
+		request.setAttribute(ATT_FORM, form);
+		request.setAttribute(ATT_USER, utilisateur);
+
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
 }
