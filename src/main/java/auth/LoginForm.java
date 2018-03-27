@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public final class LoginForm {
 
-	private static final String CHAMP_EMAIL = "username";
+	private static final String CHAMP_USER = "username";
 	private static final String CHAMP_PASS = "password";
 
 	private String resultat;
@@ -32,7 +32,7 @@ public final class LoginForm {
 		try {
 			validateUsername(username);
 		} catch (Exception e) {
-			setErreur(CHAMP_EMAIL, e.getMessage());
+			setErreur(CHAMP_USER, e.getMessage());
 		}
 		user.setUsername(username);
 
