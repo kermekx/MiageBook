@@ -15,7 +15,7 @@
 	<div class="container">
 		<form method="post" action="login">
 			<div class="form-group">
-				<label for="username">Email address</label> <input type="text"
+				<label for="username">Username</label> <input type="text"
 					class="form-control ${empty form.erreurs['username'] ? 'is-valid' : 'is-invalid'}"
 					id="username" aria-describedby="userameHelp"
 					placeholder="Enter username" name="username"> <small id="userameHelp"
