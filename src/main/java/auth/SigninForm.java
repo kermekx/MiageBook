@@ -16,6 +16,14 @@ public class SigninForm {
 
 	private String resultat;
 	private Map<String, String> erreurs = new HashMap<String, String>();
+	
+	
+	private String username;
+	private String password;
+	private String confirmPassword;
+	private String mail;
+	private String firstname;
+	private String lastname;
 
 	public String getResultat() {
 		return resultat;
@@ -27,12 +35,12 @@ public class SigninForm {
 
 	public User userLogin(HttpServletRequest request) {
 		/* Récupération des champs du formulaire */
-		String username = getValeurChamp(request, CHAMP_USER);
-		String password = getValeurChamp(request, CHAMP_PASS);
-		String confirmPassword = getValeurChamp(request, CHAMP_PASS_CONFIRM);
-		String mail = getValeurChamp(request, CHAMP_MAIL);
-		String firstname = getValeurChamp(request, CHAMP_FIRSTNAME);
-		String lastname = getValeurChamp(request, CHAMP_LASTNAME);
+		username = getValeurChamp(request, CHAMP_USER);
+		password = getValeurChamp(request, CHAMP_PASS);
+		confirmPassword = getValeurChamp(request, CHAMP_PASS_CONFIRM);
+		mail = getValeurChamp(request, CHAMP_MAIL);
+		firstname = getValeurChamp(request, CHAMP_FIRSTNAME);
+		lastname = getValeurChamp(request, CHAMP_LASTNAME);
 
 		User user = new User();
 
@@ -168,4 +176,30 @@ public class SigninForm {
 			return valeur;
 		}
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+	
+	
 }

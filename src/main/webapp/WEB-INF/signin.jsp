@@ -18,7 +18,7 @@
 				<label for="username">Username</label> <input type="text"
 					class="form-control ${empty form.erreurs['username'] ? 'is-valid' : 'is-invalid'}"
 					id="username" aria-describedby="userameHelp"
-					placeholder="Enter username" name="username"> <small
+					placeholder="Enter username" name="username" value="${empty form.username ? '' : form.username}"> <small
 					id="userameHelp" class="form-text text-muted">We'll never
 					share your username with anyone else.</small>
 				<div class="invalid-feedback">${form.erreurs['username']}</div>
@@ -26,7 +26,7 @@
 			<div class="form-group">
 				<label for="password">Password</label> <input type="password"
 					class="form-control ${empty form.erreurs['password'] ? 'is-valid' : 'is-invalid'}"
-					id="password" placeholder="Password" name="password">
+					id="password" placeholder="Password" name="password" value="${empty form.password ? '' : form.password}">
 
 				<div class="invalid-feedback">${form.erreurs['password']}</div>
 			</div>
@@ -35,7 +35,7 @@
 					type="password"
 					class="form-control ${empty form.erreurs['confirmPassword'] ? 'is-valid' : 'is-invalid'}"
 					id="confirmPassword" placeholder=Confirm Password
-					name="confirmPassword">
+					name="confirmPassword" value="${empty form.confirmPassword ? '' : form.confirmPassword}">
 
 				<div class="invalid-feedback">${form.erreurs['confirmPassword']}</div>
 			</div>
@@ -43,7 +43,7 @@
 				<label for="mail">Mail</label> <input type="email"
 					class="form-control ${empty form.erreurs['mail'] ? 'is-valid' : 'is-invalid'}"
 					id="mail" aria-describedby="mailHelp" placeholder="Enter email"
-					name="mail"> <small id="mailHelp"
+					name="mail" value="${empty form.mail ? '' : form.mail}"> <small id="mailHelp"
 					class="form-text text-muted">We'll never share your mail
 					with anyone else.</small>
 				<div class="invalid-feedback">${form.erreurs['mail']}</div>
@@ -51,13 +51,13 @@
 			<div class="form-group">
 				<label for="firstname">Firstname</label> <input type="text"
 					class="form-control ${empty form.erreurs['firstname'] ? 'is-valid' : 'is-invalid'}"
-					id="firstname" placeholder="Enter firstname" name="firstname">
+					id="firstname" placeholder="Enter firstname" name="firstname" value="${empty form.firstname ? '' : form.firstname}">
 				<div class="invalid-feedback">${form.erreurs['firstname']}</div>
 			</div>
 			<div class="form-group">
 				<label for="lastname">Lastname</label> <input type="text"
 					class="form-control ${empty form.erreurs['lastname'] ? 'is-valid' : 'is-invalid'}"
-					id="username" placeholder="Enter lastname" name="lastname">
+					id="username" placeholder="Enter lastname" name="lastname" value="${empty form.lastname ? '' : form.lastname}">
 				<div class="invalid-feedback">${form.erreurs['lastname']}</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Sign in</button>
