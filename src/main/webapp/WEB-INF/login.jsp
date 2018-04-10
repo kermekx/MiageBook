@@ -13,6 +13,7 @@
 
 <body>
 	<div class="container">
+		<h1>Login</h1>
 		<form method="post" action="login">
 			<div class="form-group">
 				<label for="username">Username</label> <input type="text"
@@ -41,6 +42,7 @@
 					${sessionScope.userSession.username}</p>
 			</c:if>
 		</form>
+			<a href="signin">Pas encore de compte?</a>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

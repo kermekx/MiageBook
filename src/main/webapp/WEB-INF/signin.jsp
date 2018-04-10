@@ -13,14 +13,13 @@
 
 <body>
 	<div class="container">
+		<h1>Sign in</h1>
 		<form method="post" action="signin">
 			<div class="form-group">
 				<label for="username">Username</label> <input type="text"
 					class="form-control ${empty form.erreurs['username'] ? 'is-valid' : 'is-invalid'}"
-					id="username" aria-describedby="userameHelp"
-					placeholder="Enter username" name="username" value="${empty form.username ? '' : form.username}"> <small
-					id="userameHelp" class="form-text text-muted">We'll never
-					share your username with anyone else.</small>
+					id="username"
+					placeholder="Enter username" name="username" value="${empty form.username ? '' : form.username}">
 				<div class="invalid-feedback">${form.erreurs['username']}</div>
 			</div>
 			<div class="form-group">
@@ -44,8 +43,7 @@
 					class="form-control ${empty form.erreurs['mail'] ? 'is-valid' : 'is-invalid'}"
 					id="mail" aria-describedby="mailHelp" placeholder="Enter email"
 					name="mail" value="${empty form.mail ? '' : form.mail}"> <small id="mailHelp"
-					class="form-text text-muted">We'll never share your mail
-					with anyone else.</small>
+					class="form-text text-muted">Nous ne partagerons jamais votre adresse mail.</small>
 				<div class="invalid-feedback">${form.erreurs['mail']}</div>
 			</div>
 			<div class="form-group">
@@ -64,6 +62,7 @@
 
 			<p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
 		</form>
+		<a href="./login">Vous avez déjà un compte?</a>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
