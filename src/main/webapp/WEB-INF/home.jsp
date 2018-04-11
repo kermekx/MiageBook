@@ -15,6 +15,7 @@
 	<div class="container">
 		<p class="succes">Vous êtes connecté(e) avec le compte :
 					${sessionScope.userSession.username}</p>
+		<p><a href="./logout">Déconnexion</a></p>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
