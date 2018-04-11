@@ -89,11 +89,10 @@ public class SigninForm {
 			setErreur(CHAMP_LASTNAME, e.getMessage());
 		}
 		user.setLastname(lastname);
-		
-		UserMapper.insert(user);
 
 		/* Initialisation du résultat global de la validation. */
 		if (erreurs.isEmpty()) {
+			UserMapper.insert(user);
 			if (UserMapper.findByUsername(user.getUsername()) != null) {
 				resultat = "Succès de l'inscription.";
 			} else {
