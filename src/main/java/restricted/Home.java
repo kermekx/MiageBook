@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import sql.SQLiteJDBC;
+
 public class Home extends HttpServlet {
 	
 	private static final long serialVersionUID = -8409897140319182880L;
@@ -19,6 +21,8 @@ public class Home extends HttpServlet {
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
+        
+        SQLiteJDBC.getInstance();
 
         /*
          * Si l'objet utilisateur n'existe pas dans la session en cours, alors
