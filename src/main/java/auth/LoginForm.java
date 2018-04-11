@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import model.User;
+import persistance.UserMapper;
 
 public final class LoginForm {
 
@@ -28,23 +29,25 @@ public final class LoginForm {
 		String username = getValeurChamp(request, CHAMP_USER);
 		String password = getValeurChamp(request, CHAMP_PASS);
 
-		User user = new User();
+		User user = null;
 
 		/* Validation du champ email. */
 		try {
-			validateUsername(username);
+			user = validateUsername(username);
 		} catch (Exception e) {
 			setErreur(CHAMP_USER, e.getMessage());
 		}
-		user.setUsername(username);
 
 		/* Validation du champ mot de passe. */
 		try {
 			validatePassword(password);
+			
+			if (!password.equals(user.getPwd())) {
+				setErreur(CHAMP_PASS, "mot de passe incorrect");
+			}
 		} catch (Exception e) {
 			setErreur(CHAMP_PASS, e.getMessage());
 		}
-		user.setPwd(password);
 
 		/* Initialisation du résultat global de la validation. */
 		if (erreurs.isEmpty()) {
@@ -59,13 +62,17 @@ public final class LoginForm {
 	/**
 	 * Valide l'adresse email saisie.
 	 */
-	private void validateUsername(String username) throws Exception {
+	private User validateUsername(String username) throws Exception {
+		User user;
 		if (username != null) {
 			if (!username.matches("\\S+")) {
 				throw new Exception("Le nom d'utilisateur ne doi pas contenir d'espaces.");
 			} else if (username.length() < 3) {
 				throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
+			} else if ((user = UserMapper.findByUsername(username)) == null) {
+				throw new Exception("Le nom d'utilisateur n'éxiste pas.");
 			}
+			return user;
 		} else {
 			throw new Exception("Merci de saisir votre nom d'utilisateur.");
 		}
