@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class Login extends HttpServlet {
+	
+	private static final long serialVersionUID = -6302034752763073297L;
+	
 	public static final String ATT_USER = "user";
 	public static final String ATT_FORM = "form";
 	public static final String ATT_SESSION_USER = "userSession";
 	public static final String VUE = "/WEB-INF/login.jsp";
+	public static final String HOME = "/home";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Affichage de la page de connexion */
@@ -35,14 +39,17 @@ public class Login extends HttpServlet {
 		 */
 		if (form.getErreurs().isEmpty()) {
 			session.setAttribute(ATT_SESSION_USER, utilisateur);
+
+			response.sendRedirect(request.getContextPath() + HOME);
 		} else {
 			session.setAttribute(ATT_SESSION_USER, null);
+
+			/* Stockage du formulaire et du bean dans l'objet request */
+			request.setAttribute(ATT_FORM, form);
+			request.setAttribute(ATT_USER, utilisateur);
+
+			this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 		}
 
-		/* Stockage du formulaire et du bean dans l'objet request */
-		request.setAttribute(ATT_FORM, form);
-		request.setAttribute(ATT_USER, utilisateur);
-
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 }
