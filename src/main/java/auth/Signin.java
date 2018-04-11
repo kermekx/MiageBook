@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.User;
+
 public class Signin extends HttpServlet {
 	
 	public static final String ATT_USER = "user";

@@ -22,8 +22,6 @@ public class Home extends HttpServlet {
         /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
         
-        SQLiteJDBC.getInstance();
-
         /*
          * Si l'objet utilisateur n'existe pas dans la session en cours, alors
          * l'utilisateur n'est pas connecté.

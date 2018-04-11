@@ -2,6 +2,10 @@ package sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import model.User;
 
 public class SQLiteJDBC {
 
@@ -12,12 +16,12 @@ public class SQLiteJDBC {
 
 	}
 
-	public static SQLiteJDBC getInstance() {
+	public static SQLiteJDBC getInstance() throws SQLException {
 		if (INSTANCE == null) {
 			INSTANCE = new SQLiteJDBC();
 		}
 		
-		if (INSTANCE.c == null) {
+		if (INSTANCE.c == null || INSTANCE.c.isClosed()) {
 			INSTANCE.openConnection();
 		}
 
@@ -30,14 +34,26 @@ public class SQLiteJDBC {
 			c = DriverManager.getConnection("jdbc:sqlite:miagetest.db");
 			createTablesIfNotExist();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
 		}
 		System.out.println("Opened database successfully");
 	}
 	
 	private void createTablesIfNotExist() {
-		
+		 Statement stmt = null;
+		 
+		 try {
+	         stmt = c.createStatement();
+	         stmt.executeUpdate(User.CREATE_TABLE);
+	         stmt.close();
+	      } catch ( Exception e ) {
+	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	      }
+	}
+	
+	public Connection getC() {
+		return c;
 	}
 
 }

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.User;
+
 public class Login extends HttpServlet {
 	
 	private static final long serialVersionUID = -6302034752763073297L;

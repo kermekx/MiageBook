@@ -1,15 +1,24 @@
-package auth;
+package model;
 
 public class User {
+
+	public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS USER (" + "USERNAME CHAR(32) NOT NULL,"
+			+ "PASSWORD CHAR(32) NOT NULL," + "MAIL CHAR(128) NOT NULL," + "FIRSTNAME CHAR(32) NOT NULL,"
+			+ "LASTNAME CHAR(32) NOT NULL)";
 	
+	public static final String INSERT = "INSERT INTO USER values(?, ?, ?, ?, ?)";
+	
+	public static final String FIND_BY_USERNAME = "SELECT * FROM USER WHERE USERNAME=?";
+	public static final String FIND_BY_MAIL = "SELECT * FROM USER WHERE MAIL=?";
+
 	private String username;
 	private String pwd;
 	private String mail;
 	private String firstname;
 	private String lastname;
-	
+
 	public User() {
-		
+
 	}
 
 	public User(String username, String pwd, String mail, String firstname, String lastname) {

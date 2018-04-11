@@ -5,6 +5,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import model.User;
+import persistance.UserMapper;
+
 public class SigninForm {
 
 	private static final String CHAMP_USER = "username";
@@ -86,10 +89,17 @@ public class SigninForm {
 			setErreur(CHAMP_LASTNAME, e.getMessage());
 		}
 		user.setLastname(lastname);
+		
+		UserMapper.insert(user);
 
 		/* Initialisation du résultat global de la validation. */
 		if (erreurs.isEmpty()) {
-			resultat = "Succès de l'inscription.";
+			if (UserMapper.findByUsername(user.getUsername()) != null) {
+				resultat = "Succès de l'inscription.";
+			} else {
+				resultat = "PB BDD.";
+				setErreur(CHAMP_USER, resultat);
+			}
 		} else {
 			resultat = "Échec de l'inscription.";
 		}
@@ -106,6 +116,8 @@ public class SigninForm {
 				throw new Exception("Le nom d'utilisateur ne doi pas contenir d'espaces.");
 			} else if (username.length() < 3) {
 				throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
+			} else if (UserMapper.findByUsername(username) != null) {
+				throw new Exception("Ce nom d'utilisateur est déjà utilisé.");
 			}
 		} else {
 			throw new Exception("Merci de saisir votre nom d'utilisateur.");
@@ -139,6 +151,8 @@ public class SigninForm {
 		if (mail != null) {
 			if (!mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 				throw new Exception("Le mail n'est pas au format valide.");
+			} else if (UserMapper.findByMail(mail) != null) {
+				throw new Exception("Cette adresse email est déjà utilisée.");
 			}
 		} else {
 			throw new Exception("Merci de saisir votre adresse mail.");
