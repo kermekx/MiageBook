@@ -10,6 +10,7 @@ public class User {
 	
 	public static final String FIND_BY_USERNAME = "SELECT * FROM USER WHERE USERNAME=?";
 	public static final String FIND_BY_MAIL = "SELECT * FROM USER WHERE MAIL=?";
+	public static final String LIST_ALL = "SELECT * FROM USER";
 
 	private String username;
 	private String pwd;

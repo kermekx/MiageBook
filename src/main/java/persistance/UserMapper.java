@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.User;
 import sql.SQLiteJDBC;
@@ -52,6 +54,25 @@ public class UserMapper {
 			ResultSet rs = ps.executeQuery();
 			
 			return mapNext(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static List<User> listAll() {
+		try {
+			Connection c = SQLiteJDBC.getInstance().getC();
+
+			PreparedStatement ps = c.prepareStatement(User.LIST_ALL);
+			ResultSet rs = ps.executeQuery();
+			
+			List<User> users = new ArrayList<>();
+			User next;
+			while ((next = mapNext(rs)) != null)
+				users.add(next);
+			
+			return users;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

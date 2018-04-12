@@ -16,6 +16,11 @@
 		<p class="succes">Vous êtes connecté(e) avec le compte :
 					${sessionScope.userSession.username}</p>
 		<p><a href="./logout">Déconnexion</a></p>
+		
+		<h1>Liste des utilisateurs</h1>
+		<c:forEach items="${users}" var="user">
+		    <p>${user.username} : ${user.firstname} ${user.lastname} </p>
+		</c:forEach>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
