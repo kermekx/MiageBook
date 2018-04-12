@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class Home extends HttpServlet {
+import persistance.UserMapper;
+
+public class Users extends HttpServlet {
 	
 	private static final long serialVersionUID = -8409897140319182880L;
 
-	public static final String ACCES_PUBLIC     = "/login";
-    public static final String ACCES_RESTREINT  = "/WEB-INF/home.jsp"; 
+	public static final String ACCES_PUBLIC     = "/users";
+    public static final String ACCES_RESTREINT  = "/WEB-INF/users.jsp"; 
+    public static final String ATT_USERS = "users";
     public static final String ATT_SESSION_USER = "userSession";
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
@@ -28,6 +31,8 @@ public class Home extends HttpServlet {
             /* Redirection vers la page publique */
             response.sendRedirect( request.getContextPath() + ACCES_PUBLIC );
         } else {
+        	request.setAttribute(ATT_USERS, UserMapper.listAll());
+        	
             /* Affichage de la page restreinte */
             this.getServletContext().getRequestDispatcher( ACCES_RESTREINT ).forward( request, response );
         }
