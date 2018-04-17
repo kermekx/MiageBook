@@ -1,6 +1,6 @@
-package model;
+package model.user;
 
-public class User {
+public class User implements IUser {
 
 	public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS USER (" + "USERNAME CHAR(32) NOT NULL,"
 			+ "PASSWORD CHAR(32) NOT NULL," + "MAIL CHAR(128) NOT NULL," + "FIRSTNAME CHAR(32) NOT NULL,"
@@ -30,43 +30,53 @@ public class User {
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}
-
+	
+	@Override
 	public String getUsername() {
 		return username;
 	}
 
+	@Override
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	@Override
 	public String getPwd() {
 		return pwd;
 	}
 
+	@Override
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
 
+	@Override
 	public String getMail() {
 		return mail;
 	}
 
+	@Override
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
 
+	@Override
 	public String getFirstname() {
 		return firstname;
 	}
 
+	@Override
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
 
+	@Override
 	public String getLastname() {
 		return lastname;
 	}
 
+	@Override
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}

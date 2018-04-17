@@ -5,8 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.User;
-import persistance.UserMapper;
+import model.user.User;
+import persistance.factory.UserMapper;
 
 public final class LoginForm {
 

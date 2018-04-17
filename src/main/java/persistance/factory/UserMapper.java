@@ -1,5 +1,6 @@
-package persistance;
+package persistance.factory;
 
+import java.lang.ref.WeakReference;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,12 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.User;
+import model.user.User;
+import persistance.Mapper;
 import sql.SQLiteJDBC;
 
-public class UserMapper {
+public class UserMapper extends Mapper<User> {
 
-	public static void insert(User user) {
+	private final static UserMapper INSTANCE = new UserMapper();
+
+	public static UserMapper getInstance() {
+		return INSTANCE;
+	}
+
+	public void insert(User user) {
 		try {
 			Connection c = SQLiteJDBC.getInstance().getC();
 
@@ -23,12 +31,17 @@ public class UserMapper {
 			ps.setString(4, user.getFirstname());
 			ps.setString(5, user.getLastname());
 			ps.executeUpdate();
+
+			objects.put(user.getUsername(), new WeakReference<User>(user));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static User findByUsername(String username) {
+	public User findByUsername(String username) {
+		if (objects.containsKey(username) && objects.get(username).get() != null)
+			return objects.get(username).get();
+
 		try {
 			Connection c = SQLiteJDBC.getInstance().getC();
 
@@ -36,15 +49,20 @@ public class UserMapper {
 			ps.setString(1, username);
 
 			ResultSet rs = ps.executeQuery();
-			
-			return mapNext(rs);
+
+			User user = mapNext(rs);
+
+			if (user != null)
+				objects.put(user.getUsername(), new WeakReference<User>(user));
+
+			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public static User findByMail(String mail) {
+	public User findByMail(String mail) {
 		try {
 			Connection c = SQLiteJDBC.getInstance().getC();
 
@@ -52,26 +70,33 @@ public class UserMapper {
 			ps.setString(1, mail);
 
 			ResultSet rs = ps.executeQuery();
-			
-			return mapNext(rs);
+
+			User user = mapNext(rs);
+
+			if (user != null)
+				objects.put(user.getUsername(), new WeakReference<User>(user));
+
+			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public static List<User> listAll() {
+
+	public List<User> listAll() {
 		try {
 			Connection c = SQLiteJDBC.getInstance().getC();
 
 			PreparedStatement ps = c.prepareStatement(User.LIST_ALL);
 			ResultSet rs = ps.executeQuery();
-			
+
 			List<User> users = new ArrayList<>();
 			User next;
-			while ((next = mapNext(rs)) != null)
+			while ((next = mapNext(rs)) != null) {
+				objects.put(next.getUsername(), new WeakReference<User>(next));
 				users.add(next);
-			
+			}
+
 			return users;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,7 +104,8 @@ public class UserMapper {
 		return null;
 	}
 
-	public static User mapNext(ResultSet rs) throws SQLException {
+	@Override
+	public User mapNext(ResultSet rs) throws SQLException {
 		if (rs.next()) {
 			User user = new User();
 			user.setUsername(rs.getString(1));
@@ -89,7 +115,7 @@ public class UserMapper {
 			user.setLastname(rs.getString(5));
 			return user;
 		}
-		
+
 		return null;
 	}
 
