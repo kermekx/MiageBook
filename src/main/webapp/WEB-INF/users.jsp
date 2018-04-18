@@ -34,7 +34,7 @@
 		
 		<h1>Liste des utilisateurs</h1>
 		<c:forEach items="${users}" var="user">
-		    <p>${user.username} : ${user.firstname} ${user.lastname}</p>
+		    <p>${user.username} : ${user.firstname} ${user.lastname} - ${sessionScope.userSession.isFriend(user)}</p>
 		</c:forEach>
 	</div>
 

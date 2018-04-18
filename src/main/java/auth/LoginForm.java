@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import model.user.IUser;
-import persistance.factory.UserMapper;
+import persistance.factory.user.UserMapper;
 
 public final class LoginForm {
 

@@ -1,4 +1,4 @@
-package persistance.factory;
+package persistance.factory.user;
 
 import java.lang.ref.WeakReference;
 import java.sql.Connection;

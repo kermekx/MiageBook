@@ -1,4 +1,4 @@
-package persistance.factory;
+package persistance.factory.user;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

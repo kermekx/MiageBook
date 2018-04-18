@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import model.user.User;
-import persistance.factory.UserMapper;
+import persistance.factory.user.UserMapper;
 
 public class SigninForm {
 

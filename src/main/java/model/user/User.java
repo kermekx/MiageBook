@@ -1,13 +1,18 @@
 package model.user;
 
+import java.util.List;
+
+import model.friends.IFriends;
+import persistance.factory.friends.FriendsVirtualProxyBuilder;
+
 public class User implements IUser {
 
 	public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS USER (" + "USERNAME CHAR(32) NOT NULL,"
 			+ "PASSWORD CHAR(32) NOT NULL," + "MAIL CHAR(128) NOT NULL," + "FIRSTNAME CHAR(32) NOT NULL,"
 			+ "LASTNAME CHAR(32) NOT NULL)";
-	
+
 	public static final String INSERT = "INSERT INTO USER values(?, ?, ?, ?, ?)";
-	
+
 	public static final String FIND_BY_USERNAME = "SELECT * FROM USER WHERE USERNAME=?";
 	public static final String FIND_BY_MAIL = "SELECT * FROM USER WHERE MAIL=?";
 	public static final String LIST_ALL = "SELECT * FROM USER";
@@ -17,6 +22,7 @@ public class User implements IUser {
 	private String mail;
 	private String firstname;
 	private String lastname;
+	private IFriends friends;
 
 	public User() {
 
@@ -29,8 +35,10 @@ public class User implements IUser {
 		this.mail = mail;
 		this.firstname = firstname;
 		this.lastname = lastname;
+
+		friends = new FriendsVirtualProxyBuilder(username).getProxy();
 	}
-	
+
 	@Override
 	public String getUsername() {
 		return username;
@@ -39,6 +47,7 @@ public class User implements IUser {
 	@Override
 	public void setUsername(String username) {
 		this.username = username;
+		friends = new FriendsVirtualProxyBuilder(username).getProxy();
 	}
 
 	@Override
@@ -79,6 +88,34 @@ public class User implements IUser {
 	@Override
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+	@Override
+	public boolean isFriend(IUser user) {
+		return friends.isFriend(user);
+	}
+
+	@Override
+	public void addFriend(IUser user) {
+		friends.addFriend(user);
+	}
+
+	@Override
+	public List<IUser> getFriends(IUser user) {
+		return friends.getFriends(user);
+	}
+
+	@Override
+	public void removeFriend(IUser user) {
+		friends.removeFriend(user);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof IUser)
+			return username.equals(((IUser) obj).getUsername());
+
+		return super.equals(obj);
 	}
 
 }

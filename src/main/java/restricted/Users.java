@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import persistance.factory.UserMapper;
+import persistance.factory.user.UserMapper;
 
 public class Users extends HttpServlet {
 	
 	private static final long serialVersionUID = -8409897140319182880L;
 
-	public static final String ACCES_PUBLIC     = "/users";
+	public static final String ACCES_PUBLIC     = "/login";
     public static final String ACCES_RESTREINT  = "/WEB-INF/users.jsp"; 
     public static final String ATT_USERS = "users";
     public static final String ATT_SESSION_USER = "userSession";

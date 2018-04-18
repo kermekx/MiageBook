@@ -1,5 +1,7 @@
 package model.user;
 
+import java.util.List;
+
 public interface IUser {
 	
 	public String getUsername();
@@ -16,5 +18,10 @@ public interface IUser {
 
 	public String getLastname();
 	public void setLastname(String lastname);
+	
+	public boolean isFriend(IUser user);
+	public void addFriend(IUser user);
+	public void removeFriend(IUser user);
+	public List<IUser> getFriends(IUser user);
 
 }

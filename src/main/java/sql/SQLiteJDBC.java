@@ -1,10 +1,14 @@
 package sql;
 
+import java.lang.ref.WeakReference;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import model.friends.Friends;
+import model.user.IUser;
 import model.user.User;
 
 public class SQLiteJDBC {
@@ -47,7 +51,21 @@ public class SQLiteJDBC {
 	         stmt = c.createStatement();
 	         stmt.executeUpdate(User.CREATE_TABLE);
 	         stmt.close();
+	         
+	         stmt = c.createStatement();
+	         stmt.executeUpdate("DROP TABLE IF EXISTS FRIENDS");
+	         stmt.close();
+	         
+	         stmt = c.createStatement();
+	         stmt.executeUpdate(Friends.CREATE_TABLE);
+	         stmt.close();
+	         
+	         stmt = c.createStatement();
+	         stmt.executeUpdate("INSERT INTO FRIENDS values('calentoura', 'messiaenk')");
+	         stmt.close();
+
 	      } catch ( Exception e ) {
+	    	  e.printStackTrace();
 	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	      }
 	}
