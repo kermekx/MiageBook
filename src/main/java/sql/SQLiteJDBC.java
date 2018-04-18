@@ -53,15 +53,7 @@ public class SQLiteJDBC {
 	         stmt.close();
 	         
 	         stmt = c.createStatement();
-	         stmt.executeUpdate("DROP TABLE IF EXISTS FRIENDS");
-	         stmt.close();
-	         
-	         stmt = c.createStatement();
 	         stmt.executeUpdate(Friends.CREATE_TABLE);
-	         stmt.close();
-	         
-	         stmt = c.createStatement();
-	         stmt.executeUpdate("INSERT INTO FRIENDS values('calentoura', 'messiaenk')");
 	         stmt.close();
 
 	      } catch ( Exception e ) {
