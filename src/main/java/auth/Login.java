@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.user.User;
+import model.user.IUser;
 
 public class Login extends HttpServlet {
 	
@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
 		LoginForm form = new LoginForm();
 
 		/* Traitement de la requête et récupération du bean en résultant */
-		User utilisateur = form.userLogin(request);
+		IUser utilisateur = form.userLogin(request);
 
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();

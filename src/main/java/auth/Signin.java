@@ -12,9 +12,6 @@ import model.user.User;
 
 public class Signin extends HttpServlet {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6826560343632394053L;
 	public static final String ATT_USER = "user";
 	public static final String ATT_FORM = "form";

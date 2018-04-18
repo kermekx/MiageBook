@@ -31,7 +31,7 @@ public class Users extends HttpServlet {
             /* Redirection vers la page publique */
             response.sendRedirect( request.getContextPath() + ACCES_PUBLIC );
         } else {
-        	request.setAttribute(ATT_USERS, UserMapper.listAll());
+        	request.setAttribute(ATT_USERS, UserMapper.getInstance().listAll());
         	
             /* Affichage de la page restreinte */
             this.getServletContext().getRequestDispatcher( ACCES_RESTREINT ).forward( request, response );

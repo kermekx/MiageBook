@@ -92,8 +92,8 @@ public class SigninForm {
 
 		/* Initialisation du résultat global de la validation. */
 		if (erreurs.isEmpty()) {
-			UserMapper.insert(user);
-			if (UserMapper.findByUsername(user.getUsername()) != null) {
+			UserMapper.getInstance().insert(user);
+			if (UserMapper.getInstance().findByUsername(user.getUsername()) != null) {
 				resultat = "Succès de l'inscription.";
 			} else {
 				resultat = "PB BDD.";
@@ -115,7 +115,7 @@ public class SigninForm {
 				throw new Exception("Le nom d'utilisateur ne doi pas contenir d'espaces.");
 			} else if (username.length() < 3) {
 				throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
-			} else if (UserMapper.findByUsername(username) != null) {
+			} else if (UserMapper.getInstance().findByUsername(username) != null) {
 				throw new Exception("Ce nom d'utilisateur est déjà utilisé.");
 			}
 		} else {
@@ -150,7 +150,7 @@ public class SigninForm {
 		if (mail != null) {
 			if (!mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 				throw new Exception("Le mail n'est pas au format valide.");
-			} else if (UserMapper.findByMail(mail) != null) {
+			} else if (UserMapper.getInstance().findByMail(mail) != null) {
 				throw new Exception("Cette adresse email est déjà utilisée.");
 			}
 		} else {

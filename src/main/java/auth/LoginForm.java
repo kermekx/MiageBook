@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.user.User;
+import model.user.IUser;
 import persistance.factory.UserMapper;
 
 public final class LoginForm {
@@ -24,12 +24,12 @@ public final class LoginForm {
 		return erreurs;
 	}
 
-	public User userLogin(HttpServletRequest request) {
+	public IUser userLogin(HttpServletRequest request) {
 		/* Récupération des champs du formulaire */
 		String username = getValeurChamp(request, CHAMP_USER);
 		String password = getValeurChamp(request, CHAMP_PASS);
 
-		User user = null;
+		IUser user = null;
 
 		/* Validation du champ email. */
 		try {
@@ -62,14 +62,14 @@ public final class LoginForm {
 	/**
 	 * Valide l'adresse email saisie.
 	 */
-	private User validateUsername(String username) throws Exception {
-		User user;
+	private IUser validateUsername(String username) throws Exception {
+		IUser user;
 		if (username != null) {
 			if (!username.matches("\\S+")) {
 				throw new Exception("Le nom d'utilisateur ne doi pas contenir d'espaces.");
 			} else if (username.length() < 3) {
 				throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
-			} else if ((user = UserMapper.findByUsername(username)) == null) {
+			} else if ((user = UserMapper.getInstance().findByUsername(username)) == null) {
 				throw new Exception("Le nom d'utilisateur n'éxiste pas.");
 			}
 			return user;
