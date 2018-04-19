@@ -13,6 +13,12 @@ public class Friends implements IFriends {
 	public static final String FIND_FRIENDS = "SELECT f1.USERNAME_RIGHT FROM FRIENDS f1 WHERE f1.USERNAME_LEFT = ? "
 			+ "UNION "
 			+ "SELECT f2.USERNAME_LEFT FROM FRIENDS f2 WHERE f2.USERNAME_RIGHT = ?";
+	
+	public static final String ADD_FRIEND = "INSERT INTO FRIENDS value(?, ?)";
+	
+	public static final String REMOVE_FRIEND = "DELETE FROM FRIENDS WHERE "
+			+ "(USERNAME_LEFT = ? AND USERNAME_RIGHT = ?) OR "
+			+ "(USERNAME_LEFT = ? AND USERNAME_RIGHT = ?)";
 
 	public IUser user;
 	public List<IUser> friends = new ArrayList<>();

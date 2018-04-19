@@ -44,6 +44,38 @@ public class FriendsMapper extends Mapper<IFriends> {
 			return null;
 		}
 	}
+	
+	public boolean addFriend(String left, String right) {
+		try {
+			Connection c = SQLiteJDBC.getInstance().getC();
+
+			PreparedStatement ps = c.prepareStatement(Friends.ADD_FRIEND);
+			ps.setString(1, left);
+			ps.setString(2, right);
+
+			return ps.executeUpdate() == 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean removeFriend(String left, String right) {
+		try {
+			Connection c = SQLiteJDBC.getInstance().getC();
+
+			PreparedStatement ps = c.prepareStatement(Friends.REMOVE_FRIEND);
+			ps.setString(1, left);
+			ps.setString(2, right);
+			ps.setString(3, right);
+			ps.setString(4, left);
+			
+			return ps.executeUpdate() > 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	@Override
 	public Friends mapNext(ResultSet rs) throws SQLException {
