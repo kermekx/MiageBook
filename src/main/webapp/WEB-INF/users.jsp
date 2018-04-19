@@ -34,7 +34,15 @@
 		
 		<h1>Liste des utilisateurs</h1>
 		<c:forEach items="${users}" var="user">
-		    <p>${user.username} : ${user.firstname} ${user.lastname} - ${sessionScope.userSession.isFriend(user)}</p>
+		    <p>${user.username} : ${user.firstname} ${user.lastname} - 
+		    <c:choose>
+			    <c:when test="${sessionScope.userSession.isFriend(user)}">
+			        <button>Remove friend</button> 
+			    </c:when>    
+			    <c:otherwise>
+			        <button>Add friend</button> 
+			    </c:otherwise>
+			</c:choose></p>
 		</c:forEach>
 	</div>
 

@@ -1,6 +1,7 @@
 package restricted;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.user.IUser;
 import persistance.factory.user.UserMapper;
 
 public class Users extends HttpServlet {
@@ -31,7 +33,9 @@ public class Users extends HttpServlet {
             /* Redirection vers la page publique */
             response.sendRedirect( request.getContextPath() + ACCES_PUBLIC );
         } else {
-        	request.setAttribute(ATT_USERS, UserMapper.getInstance().listAll());
+        	List<IUser> all = UserMapper.getInstance().listAll();
+        	all.remove(session.getAttribute( ATT_SESSION_USER ));
+        	request.setAttribute(ATT_USERS, all);
         	
             /* Affichage de la page restreinte */
             this.getServletContext().getRequestDispatcher( ACCES_RESTREINT ).forward( request, response );
