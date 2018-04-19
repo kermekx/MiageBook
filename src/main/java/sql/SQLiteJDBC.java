@@ -55,7 +55,7 @@ public class SQLiteJDBC {
 	         stmt = c.createStatement();
 	         stmt.executeUpdate(Friends.CREATE_TABLE);
 	         stmt.close();
-
+	         
 	      } catch ( Exception e ) {
 	    	  e.printStackTrace();
 	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
