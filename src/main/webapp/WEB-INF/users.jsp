@@ -37,10 +37,18 @@
 		    <p>${user.username} : ${user.firstname} ${user.lastname} - 
 		    <c:choose>
 			    <c:when test="${sessionScope.userSession.isFriend(user)}">
-			        <button>Remove friend</button> 
+			        <form action="./users" method="post">
+					  <input type="hidden" name="username" value="${user.username}">
+					  <input type="hidden" name="add" value="false">
+					  <button type="submit">Remove friend</button>
+					</form>
 			    </c:when>    
 			    <c:otherwise>
-			        <button>Add friend</button> 
+				    <form action="./users" method="post">
+					  <input type="hidden" name="username" value="${user.username}">
+					  <input type="hidden" name="add" value="true">
+					  <button type="submit">Add friend</button>
+					</form>
 			    </c:otherwise>
 			</c:choose></p>
 		</c:forEach>

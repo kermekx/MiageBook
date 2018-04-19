@@ -95,10 +95,10 @@ public class UserForm {
 				return;
 			}
 			
-			cur.addFriend(user);
-			user.addFriend(cur);
+			cur.removeFriend(user);
+			user.removeFriend(cur);
 			
-			if (FriendsMapper.getInstance().addFriend(user.getUsername(), cur.getUsername())) {
+			if (FriendsMapper.getInstance().removeFriend(user.getUsername(), cur.getUsername())) {
 				resultat = "Ami supprimé.";
 				return;
 			} else {

@@ -14,7 +14,7 @@ public class Friends implements IFriends {
 			+ "UNION "
 			+ "SELECT f2.USERNAME_LEFT FROM FRIENDS f2 WHERE f2.USERNAME_RIGHT = ?";
 	
-	public static final String ADD_FRIEND = "INSERT INTO FRIENDS value(?, ?)";
+	public static final String ADD_FRIEND = "INSERT INTO FRIENDS values(?, ?)";
 	
 	public static final String REMOVE_FRIEND = "DELETE FROM FRIENDS WHERE "
 			+ "(USERNAME_LEFT = ? AND USERNAME_RIGHT = ?) OR "
