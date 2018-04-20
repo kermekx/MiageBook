@@ -101,8 +101,8 @@ public class User implements IUser {
 	}
 
 	@Override
-	public List<IUser> getFriends(IUser user) {
-		return friends.getFriends(user);
+	public List<IUser> getFriends() {
+		return friends.getFriends();
 	}
 
 	@Override

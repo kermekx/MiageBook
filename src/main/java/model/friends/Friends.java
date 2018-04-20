@@ -50,7 +50,7 @@ public class Friends implements IFriends {
 	}
 
 	@Override
-	public List<IUser> getFriends(IUser user) {
+	public List<IUser> getFriends() {
 		return friends;
 	}
 

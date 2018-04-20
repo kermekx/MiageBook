@@ -22,6 +22,6 @@ public interface IUser {
 	public boolean isFriend(IUser user);
 	public void addFriend(IUser user);
 	public void removeFriend(IUser user);
-	public List<IUser> getFriends(IUser user);
+	public List<IUser> getFriends();
 
 }

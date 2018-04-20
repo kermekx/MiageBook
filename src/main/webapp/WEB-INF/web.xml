@@ -61,4 +61,13 @@
 	<url-pattern>/users</url-pattern>
 </servlet-mapping>
 
+<servlet>
+	<servlet-name>Profile</servlet-name>
+	<servlet-class>restricted.Profile</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>Profile</servlet-name>
+	<url-pattern>/profile</url-pattern>
+</servlet-mapping>
+
 </web-app>
