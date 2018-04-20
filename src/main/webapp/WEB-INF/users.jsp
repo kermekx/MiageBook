@@ -37,23 +37,24 @@
 		
 		<h1>Liste des utilisateurs</h1>
 		<c:forEach items="${users}" var="user">
-		    <p>${user.username} : ${user.firstname} ${user.lastname} - 
 		    <c:choose>
 			    <c:when test="${sessionScope.userSession.isFriend(user)}">
-			        <form action="./users" method="post">
+			        <form action="./users" method="post" class="form-inline pt-1">
+			          <label class="mr-sm-2" for="username">${user.username}</label>
 					  <input type="hidden" name="username" value="${user.username}">
 					  <input type="hidden" name="add" value="false">
-					  <button type="submit">Remove friend</button>
+					  <button type="submit" class="btn btn-primary btn-sm">Remove friend</button>
 					</form>
 			    </c:when>    
 			    <c:otherwise>
-				    <form action="./users" method="post">
+				    <form action="./users" method="post" class="form-inline pt-1">
+				    <label class="mr-sm-2" for="username">${user.username}</label>
 					  <input type="hidden" name="username" value="${user.username}">
 					  <input type="hidden" name="add" value="true">
-					  <button type="submit">Add friend</button>
+					  <button type="submit" class="btn btn-primary btn-sm">Add friend</button>
 					</form>
 			    </c:otherwise>
-			</c:choose></p>
+			</c:choose>
 		</c:forEach>
 	</div>
 

@@ -34,15 +34,19 @@
 	</nav>
 	
 	<div class="container">
+	
+		<h1>${sessionScope.userSession.username}</h1>
+		
+		<p>${sessionScope.userSession.firstname} ${sessionScope.userSession.lastname}</p>
 		
 		<h1>Liste des amis</h1>
 		<c:forEach items="${friends}" var="user">
-		    <p>${user.username} : ${user.firstname} ${user.lastname} - 
-		        <form action="./profile" method="post">
-				  <input type="hidden" name="username" value="${user.username}">
-				  <input type="hidden" name="add" value="false">
-				  <button type="submit">Remove friend</button>
-				</form>
+		   <form action="./users" method="post" class="form-inline pt-1">
+	          <label class="mr-sm-2" for="username">${user.username}</label>
+			  <input type="hidden" name="username" value="${user.username}">
+			  <input type="hidden" name="add" value="false">
+			  <button type="submit" class="btn btn-primary btn-sm">Remove friend</button>
+			</form>
 		</c:forEach>
 	</div>
 
