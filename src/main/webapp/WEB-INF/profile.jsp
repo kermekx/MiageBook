@@ -42,7 +42,7 @@
 		
 		<h1>Liste des amis</h1>
 		<c:forEach items="${friends}" var="user">
-		   <form action="./users" method="post" class="form-inline pt-1">
+		   <form action="./profile" method="post" class="form-inline pt-1">
 	          <label class="mr-sm-2" for="username">${user.username}</label>
 			  <input type="hidden" name="username" value="${user.username}">
 			  <input type="hidden" name="add" value="false">
