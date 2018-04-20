@@ -70,4 +70,14 @@
 	<url-pattern>/profile</url-pattern>
 </servlet-mapping>
 
+<servlet>
+	<servlet-name>CheckUsername</servlet-name>
+	<servlet-class>auth.UsernameChecker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>CheckUsername</servlet-name>
+	<url-pattern>/checkUsername</url-pattern>
+</servlet-mapping>
+
+
 </web-app>

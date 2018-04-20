@@ -21,7 +21,7 @@
 					class="form-control ${empty form.erreurs['username'] ? 'is-valid' : 'is-invalid'}"
 					id="username"
 					placeholder="Enter username" name="username" value="${empty form.username ? '' : form.username}">
-				<div class="invalid-feedback">${form.erreurs['username']}</div>
+				<div class="invalid-feedback" id="usernameInvalidFeedback">${form.erreurs['username']}</div>
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label> <input type="password"
@@ -34,7 +34,7 @@
 				<label for="confirmPassword">Confirm Password</label> <input
 					type="password"
 					class="form-control ${empty form.erreurs['confirmPassword'] ? 'is-valid' : 'is-invalid'}"
-					id="confirmPassword" placeholder=Confirm Password
+					id="confirmPassword" placeholder="Confirm Password"
 					name="confirmPassword" value="${empty form.confirmPassword ? '' : form.confirmPassword}">
 
 				<div class="invalid-feedback">${form.erreurs['confirmPassword']}</div>
@@ -56,7 +56,7 @@
 			<div class="form-group">
 				<label for="lastname">Lastname</label> <input type="text"
 					class="form-control ${empty form.erreurs['lastname'] ? 'is-valid' : 'is-invalid'}"
-					id="username" placeholder="Enter lastname" name="lastname" value="${empty form.lastname ? '' : form.lastname}">
+					id="lastname" placeholder="Enter lastname" name="lastname" value="${empty form.lastname ? '' : form.lastname}">
 				<div class="invalid-feedback">${form.erreurs['lastname']}</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Sign in</button>
@@ -66,10 +66,38 @@
 		<a href="./login">Vous avez déjà un compte?</a>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		
+		
+		
+	<script type="text/javascript">
+		console.log("ready");
+		$(document).ready(function(){
+		    $("#username").change(function() {
+		    	console.log("change");
+		        var usernameValue = $(this).val(); // this.value
+		        console.log("user : " + usernameValue);
+		        $.ajax({
+                    url : "./checkUsername",
+                    type: 'GET',
+                    data : {
+                        username : usernameValue
+                    },
+                    success : function(results){
+                        if(results != null && results=!= "AVAILABLE"){
+                            $('#username').removeClass("is-invalid").addClass("is-valid");
+                        }else{
+                            $('#username').removeClass("is-valid").addClass("is-invalid");
+                            $('#usernameInvalidFeedback').text("This username is already used");
+                        }
+                    }
+                });
+		    });
+		}); 
+	</script>
 </body>
 </html>
