@@ -79,5 +79,14 @@
 	<url-pattern>/checkUsername</url-pattern>
 </servlet-mapping>
 
+<servlet>
+	<servlet-name>CheckMail</servlet-name>
+	<servlet-class>auth.MailChecker</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>CheckMail</servlet-name>
+	<url-pattern>/checkMail</url-pattern>
+</servlet-mapping>
+
 
 </web-app>

@@ -45,7 +45,7 @@
 					id="mail" aria-describedby="mailHelp" placeholder="Enter email"
 					name="mail" value="${empty form.mail ? '' : form.mail}"> <small id="mailHelp"
 					class="form-text text-muted">Nous ne partagerons jamais votre adresse mail.</small>
-				<div class="invalid-feedback">${form.erreurs['mail']}</div>
+				<div class="invalid-feedback" id="mailInvalidFeedback">${form.erreurs['mail']}</div>
 			</div>
 			<div class="form-group">
 				<label for="firstname">Firstname</label> <input type="text"
@@ -80,7 +80,6 @@
 		    $("#username").change(function() {
 		    	console.log("change");
 		        var usernameValue = $(this).val(); // this.value
-		        console.log("user : " + usernameValue);
 		        $.ajax({
                     url : "./checkUsername",
                     type: 'GET',
@@ -93,6 +92,26 @@
                         }else{
                             $('#username').removeClass("is-valid").addClass("is-invalid");
                             $('#usernameInvalidFeedback').text("This username is already used");
+                        }
+                    }
+                });
+		    });
+		    
+		    $("#mail").change(function() {
+		    	console.log("change");
+		        var mailValue = $(this).val(); // this.value
+		        $.ajax({
+                    url : "./checkMail",
+                    type: 'GET',
+                    data : {
+                        mail : mailValue
+                    },
+                    success : function(results){
+                        if(results != null && results=!= "AVAILABLE"){
+                            $('#mail').removeClass("is-invalid").addClass("is-valid");
+                        }else{
+                            $('#mail').removeClass("is-valid").addClass("is-invalid");
+                            $('#mailInvalidFeedback').text("This mail is already used");
                         }
                     }
                 });
