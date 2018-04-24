@@ -36,8 +36,9 @@
 	
 	<div class="container">
 		
-		<p class="succes">Bienvenue
-					${sessionScope.userSession.username}!</p>
+		<h1>Status</h1>
+					
+					
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
