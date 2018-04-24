@@ -25,7 +25,7 @@ public class User implements IUser {
 	private IFriends friends;
 
 	public User() {
-
+		
 	}
 
 	public User(String username, String pwd, String mail, String firstname, String lastname) {

@@ -3,6 +3,7 @@ package model.comment;
 import java.sql.Timestamp;
 
 import model.status.IStatus;
+import model.user.IUser;
 
 public interface IComment {
 	
@@ -18,7 +19,7 @@ public interface IComment {
 	public Timestamp getPublicationDate();
 	public void setPublicationDate(Timestamp publicationDate);
 	
-	public String getOwner();
-	public void setOwner(String owner);
+	public IUser getOwner();
+	public void setOwner(IUser owner);
 	
 }

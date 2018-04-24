@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.stream.events.Comment;
 
 import model.comment.IComment;
+import model.user.IUser;
 
 public interface IStatus {
 	
@@ -24,8 +25,8 @@ public interface IStatus {
 	public Timestamp getPublicationDate();
 	public void setPublicationDate(Timestamp publicationDate);
 	
-	public String getOwner();
-	public void setOwner(String owner);
+	public IUser getOwner();
+	public void setOwner(IUser owner);
 	
 	public void addComment(IComment commment);
 	public void removeComment(IComment comment);
