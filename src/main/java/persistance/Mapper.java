@@ -10,6 +10,6 @@ public abstract class Mapper<O> {
 	
 	protected Map<String, WeakReference<O>> objects = new HashMap<>();
 	
-	public abstract O mapNext(ResultSet rs) throws SQLException;
+	public abstract O mapNext(ResultSet rs) throws Exception;
 
 }

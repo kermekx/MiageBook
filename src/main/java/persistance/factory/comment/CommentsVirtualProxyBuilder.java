@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import model.comment.IComment;
 import model.comment.IComments;
 
 public class CommentsVirtualProxyBuilder implements InvocationHandler {
@@ -24,9 +23,9 @@ public class CommentsVirtualProxyBuilder implements InvocationHandler {
 		this.factory = new CommentsFactory();
 	}
 
-	public IComment getProxy() {
-		IComment r = (IComment) Proxy.newProxyInstance(IComment.class.getClassLoader(),
-				new Class<?>[] { IComment.class }, this);
+	public IComments getProxy() {
+		IComments r = (IComments) Proxy.newProxyInstance(IComments.class.getClassLoader(),
+				new Class<?>[] { IComments.class }, this);
 		return r;
 	}
 

@@ -3,12 +3,13 @@ package persistance.factory.comment;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import model.comment.Comment;
 import model.comment.Comments;
 import model.comment.IComments;
 import persistance.Mapper;
+import persistance.factory.status.StatusFactory;
+import persistance.factory.user.UserFactory;
 import sql.SQLiteJDBC;
 
 public class CommentsMapper extends Mapper<IComments> {
@@ -32,7 +33,7 @@ public class CommentsMapper extends Mapper<IComments> {
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				comments.addComment(new CommentFactory().create(rs.getString(1)));
+				comments.addComment(mapNextComment(rs));
 			}
 			
 			rs.close();
@@ -48,7 +49,7 @@ public class CommentsMapper extends Mapper<IComments> {
 		try {
 			Connection c = SQLiteJDBC.getInstance().getC();
 
-			PreparedStatement ps = c.prepareStatement(Comment.ADD_COMMENT);
+			PreparedStatement ps = c.prepareStatement(Comments.ADD_COMMENT);
 			ps.setInt(1, comment.getId());
 			ps.setInt(2, comment.getParentStatus().getId());
 			ps.setString(3, comment.getText());
@@ -66,7 +67,7 @@ public class CommentsMapper extends Mapper<IComments> {
 		try {
 			Connection c = SQLiteJDBC.getInstance().getC();
 
-			PreparedStatement ps = c.prepareStatement(Comment.REMOVE_COMMENT);
+			PreparedStatement ps = c.prepareStatement(Comments.REMOVE_COMMENT);
 			ps.setInt(1, comment.getId());
 			
 			return ps.executeUpdate() > 0;
@@ -77,8 +78,17 @@ public class CommentsMapper extends Mapper<IComments> {
 	}
 
 	@Override
-	public Comments mapNext(ResultSet rs) throws SQLException {
+	public Comments mapNext(ResultSet rs) throws Exception {
 		return null;
 	}
 
+	public Comment mapNextComment(ResultSet rs) throws Exception {
+		Comment comment = new Comment();
+		comment.setId(rs.getInt(1));
+		comment.setParentStatus(new StatusFactory().create(rs.getInt(2)));
+		comment.setText(rs.getString(3));
+		comment.setPublicationDate(rs.getTimestamp(4));
+		comment.setOwner(new UserFactory().create(rs.getString(5)));
+		return comment;
+	}
 }

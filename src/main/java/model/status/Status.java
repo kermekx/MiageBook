@@ -6,10 +6,18 @@ import java.util.List;
 import model.comment.IComment;
 import model.comment.IComments;
 import model.user.IUser;
+import persistance.factory.comment.CommentsVirtualProxyBuilder;
 import persistance.factory.friends.FriendsVirtualProxyBuilder;
 
 public class Status implements IStatus {
 	
+	public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS STATUS ("
+			+ "ID INTEGER, STATUS_TITLE TEXT, STATUS_TEXT TEXT, IMAGE_URL TEXT, PUBLICATION_DATE TIMESTAMP, OWNER TEXT )";
+
+	public static final String INSERT = "INSERT INTO STATUS values(?, ?, ?, ?, ?, ?)";
+	
+	public static final String FIND_BY_ID = "SELECT * FROM STATUS WHERE ID = ? ";
+
 	private int id;
 	private String title;
 	private String text;
@@ -43,6 +51,7 @@ public class Status implements IStatus {
 	@Override
 	public void setId(int id) {
 		this.id = id;
+		comments = new CommentsVirtualProxyBuilder(id).getProxy();
 	}
 
 	@Override
@@ -97,20 +106,17 @@ public class Status implements IStatus {
 
 	@Override
 	public void addComment(IComment commment) {
-		// TODO Auto-generated method stub
-
+		comments.addComment(commment);
 	}
 
 	@Override
 	public void removeComment(IComment comment) {
-		// TODO Auto-generated method stub
-
+		comments.removeComment(comment);
 	}
 
 	@Override
 	public List<IComment> getComment() {
-		// TODO Auto-generated method stub
-		return null;
+		return comments.getComment();
 	}
 
 }

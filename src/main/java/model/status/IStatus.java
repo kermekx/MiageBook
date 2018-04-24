@@ -30,5 +30,5 @@ public interface IStatus {
 	
 	public void addComment(IComment commment);
 	public void removeComment(IComment comment);
-	public List<Comment> getComment();
+	public List<IComment> getComment();
 }

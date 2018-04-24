@@ -10,9 +10,7 @@ public class Comments implements IComments {
 	public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS COMMENTS ("
 			+ "COMMENT_ID INTEGER, STATUS_ID INTEGER, COMMENT_TEXT TEXT, PUBLICATION_DATE TIMESTAMP, OWNER TEXT )";
 
-	public static final String FIND_COMMENTS = "SELECT * FROM COMMENTS WHERE STATUS_ID = ? "
-			+ "UNION "
-			+ "SELECT f2.USERNAME_LEFT FROM FRIENDS f2 WHERE f2.USERNAME_RIGHT = ?";
+	public static final String FIND_COMMENTS = "SELECT * FROM COMMENTS WHERE STATUS_ID = ? ";
 	
 	public static final String ADD_COMMENT = "INSERT INTO COMMENTS values(?, ?, ?, ?, ?)";
 	

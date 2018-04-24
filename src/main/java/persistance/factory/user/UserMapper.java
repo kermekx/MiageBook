@@ -57,7 +57,7 @@ public class UserMapper extends Mapper<IUser> {
 				objects.put(user.getUsername(), new WeakReference<IUser>(user));
 
 			return user;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -78,7 +78,7 @@ public class UserMapper extends Mapper<IUser> {
 				objects.put(user.getUsername(), new WeakReference<IUser>(user));
 
 			return user;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -99,14 +99,14 @@ public class UserMapper extends Mapper<IUser> {
 			}
 
 			return users;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
 	@Override
-	public User mapNext(ResultSet rs) throws SQLException {
+	public User mapNext(ResultSet rs) throws Exception {
 		if (rs.next()) {
 			User user = new User();
 			user.setUsername(rs.getString(1));

@@ -78,7 +78,7 @@ public class FriendsMapper extends Mapper<IFriends> {
 	}
 
 	@Override
-	public Friends mapNext(ResultSet rs) throws SQLException {
+	public Friends mapNext(ResultSet rs) throws Exception {
 		return null;
 	}
 
