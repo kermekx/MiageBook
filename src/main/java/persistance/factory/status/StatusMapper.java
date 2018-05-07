@@ -11,8 +11,6 @@ import java.util.List;
 
 import model.status.IStatus;
 import model.status.Status;
-import model.user.IUser;
-import model.user.User;
 import persistance.Mapper;
 import persistance.factory.user.UserFactory;
 import sql.SQLiteJDBC;
@@ -35,7 +33,7 @@ public class StatusMapper extends Mapper<IStatus> {
 			ps.setString(3, status.getText());
 			ps.setString(4, status.getImageURL());
 			ps.setTimestamp(5, status.getPublicationDate());
-			ps.setString(5, status.getOwner().getUsername());
+			ps.setString(6, status.getOwner().getUsername());
 			ps.executeUpdate();
 
 			objects.put(""+status.getId(), new WeakReference<IStatus>(status));
@@ -103,7 +101,7 @@ public class StatusMapper extends Mapper<IStatus> {
 			status.setTitle(rs.getString(2));
 			status.setText(rs.getString(3));
 			status.setImage(rs.getString(4));
-			status.setPublicationDate(new Timestamp(rs.getLong(5)));
+			status.setPublicationDate(rs.getTimestamp(5));
 			status.setOwner(new UserFactory().create(rs.getString(6)));
 			return status;
 		}

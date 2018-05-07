@@ -53,7 +53,7 @@
 		<c:forEach items="${status}" var="s">
 	        <div>
 	          <h3>${s.title}</h3>
-			  <p>${s.text}</p>
+			  <p><small>by ${s.owner.username} :</small> ${s.text}</p>
 			</div>
 		</c:forEach>
 	</div>
