@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +103,7 @@ public class StatusMapper extends Mapper<IStatus> {
 			status.setTitle(rs.getString(2));
 			status.setText(rs.getString(3));
 			status.setImage(rs.getString(4));
-			status.setPublicationDate(rs.getTimestamp(5));
+			status.setPublicationDate(new Timestamp(rs.getLong(5)));
 			status.setOwner(new UserFactory().create(rs.getString(6)));
 			return status;
 		}

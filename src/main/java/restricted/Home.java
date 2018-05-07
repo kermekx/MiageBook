@@ -36,4 +36,25 @@ public class Home extends HttpServlet {
             this.getServletContext().getRequestDispatcher( ACCES_RESTREINT ).forward( request, response );
         }
     }
+    
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	HttpSession session = request.getSession();
+
+		/*
+		 * Si l'objet utilisateur n'existe pas dans la session en cours, alors
+		 * l'utilisateur n'est pas connecté.
+		 */
+		if (session.getAttribute(ATT_SESSION_USER) == null) {
+			/* Redirection vers la page publique */
+			response.sendRedirect(request.getContextPath() + ACCES_PUBLIC);
+		} else {
+			/* Préparation de l'objet formulaire */
+			StatusForm form = new StatusForm();
+
+			form.userRequest(request);
+
+			request.setAttribute(ATT_STATUS, StatusMapper.getInstance().listAll());
+            this.getServletContext().getRequestDispatcher( ACCES_RESTREINT ).forward( request, response );
+		}
+    }
 }

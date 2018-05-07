@@ -7,7 +7,6 @@ import model.comment.IComment;
 import model.comment.IComments;
 import model.user.IUser;
 import persistance.factory.comment.CommentsVirtualProxyBuilder;
-import persistance.factory.friends.FriendsVirtualProxyBuilder;
 
 public class Status implements IStatus {
 	
@@ -18,7 +17,7 @@ public class Status implements IStatus {
 	
 	public static final String FIND_BY_ID = "SELECT * FROM STATUS WHERE ID = ? ";
 
-	public static final String LIST_ALL = "SELECT * FROM STATUS ORDER BY PUBLICATION_DATE DESC";
+	public static final String LIST_ALL = "SELECT id, STATUS_TITLE, STATUS_TEXT, IMAGE_URL, PUBLICATION_DATE, OWNER FROM STATUS ORDER BY PUBLICATION_DATE DESC";
 
 	private int id;
 	private String title;

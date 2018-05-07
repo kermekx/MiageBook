@@ -37,7 +37,19 @@
 	<div class="container">
 		
 		<h1>Status</h1>
-					
+		
+		<form method="post" action="home">
+			<div class="form-group">
+				<label for="title">Title</label> <input type="text"
+					class="form-control" id="title" placeholder="Title" name="title">
+			</div>
+			<div class="form-group">
+				<label for="text">Text</label> <input type="text"
+					class="form-control" id="text" placeholder="Text" name="text">
+			</div>
+			<button type="submit" class="btn btn-primary">Post</button>
+		</form>
+							
 		<c:forEach items="${status}" var="s">
 	        <div>
 	          <h3>${s.title}</h3>
