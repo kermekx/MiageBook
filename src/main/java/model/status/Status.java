@@ -18,6 +18,8 @@ public class Status implements IStatus {
 	
 	public static final String FIND_BY_ID = "SELECT * FROM STATUS WHERE ID = ? ";
 
+	public static final String LIST_ALL = "SELECT * FROM STATUS ORDER BY PUBLICATION_DATE DESC";
+
 	private int id;
 	private String title;
 	private String text;

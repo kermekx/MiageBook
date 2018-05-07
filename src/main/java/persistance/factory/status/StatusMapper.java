@@ -55,13 +55,40 @@ public class StatusMapper extends Mapper<IStatus> {
 
 			ResultSet rs = ps.executeQuery();
 
-			Status status = mapNext(rs);
+			Status status = null;
+			try {
+				status = mapNext(rs);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			if (status != null)
 				objects.put(""+status.getId(), new WeakReference<IStatus>(status));
 
 			return status;
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public List<IStatus> listAll() {
+		try {
+			Connection c = SQLiteJDBC.getInstance().getC();
+
+			PreparedStatement ps = c.prepareStatement(Status.LIST_ALL);
+			ResultSet rs = ps.executeQuery();
+
+			List<IStatus> status = new ArrayList<>();
+			Status next;
+			while ((next = mapNext(rs)) != null) {
+				objects.put("" + next.getId(), new WeakReference<IStatus>(next));
+				status.add(next);
+			}
+
+			return status;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

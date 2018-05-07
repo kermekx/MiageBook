@@ -38,7 +38,12 @@
 		
 		<h1>Status</h1>
 					
-					
+		<c:forEach items="${status}" var="s">
+	        <div>
+	          <h3>${s.title}</h3>
+			  <p>${s.text}</p>
+			</div>
+		</c:forEach>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

@@ -54,7 +54,7 @@ public class CommentsMapper extends Mapper<IComments> {
 			ps.setInt(2, comment.getParentStatus().getId());
 			ps.setString(3, comment.getText());
 			ps.setTimestamp(4, comment.getPublicationDate());
-			ps.setString(5, comment.getOwner());
+			ps.setString(5, comment.getOwner().getUsername());
 
 			return ps.executeUpdate() == 1;
 		} catch (Exception e) {

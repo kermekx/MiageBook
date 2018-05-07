@@ -3,6 +3,7 @@ package model.comment;
 import java.sql.Timestamp;
 
 import model.status.IStatus;
+import model.user.IUser;
 
 public class Comment implements IComment {
 
@@ -55,15 +56,15 @@ public class Comment implements IComment {
 	}
 
 	@Override
-	public String getOwner() {
+	public IUser getOwner() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setOwner(String owner) {
+	public void setOwner(IUser owner) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

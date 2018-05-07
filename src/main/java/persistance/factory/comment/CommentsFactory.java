@@ -1,7 +1,6 @@
 package persistance.factory.comment;
 
 import model.comment.IComments;
-import model.friends.IFriends;
 
 public class CommentsFactory {
 	
